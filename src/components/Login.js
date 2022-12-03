@@ -1,8 +1,14 @@
+import { useState } from "react";
 import styled from "styled-components";
+
 const Login = () => {
 
-
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     
+ 
+
+
     return (
         <LoginContainer>
             <Backimg><img src="./img/bg.jpg" alt="background" />
@@ -16,10 +22,10 @@ const Login = () => {
             <LogDetails>
                 <img src="./img/bg2.png" alt="userProfile" />
                 <h2>User Log in</h2>
-                <input type= "type" placeholder="username" />
-                <input type= "type" placeholder="password" />
+                <input type= "type" placeholder="username" value={username} onChange={(e)=>{e.preventDefault();setUsername(e.target.value);}}/>
+                <input type= "password" placeholder="password" value={password} onChange={(e)=>{e.preventDefault();setPassword(e.target.value);}}/>
                 <a href='/'> forgot password?</a>
-                <LoginButton>Log in</LoginButton>
+                <LoginButton onClick={()=>{console.log(username,password);}}>Log in</LoginButton>
 
             </LogDetails>
 
