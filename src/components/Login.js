@@ -1,12 +1,29 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import styled from "styled-components";
+import auth from "./firebase/firebase";
+
 
 const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
- 
+
+    const userSignin = () => {
+        signInWithEmailAndPassword(auth, username, password)
+            .then((userCredential) => {
+          // Signed in 
+                //const user = userCredential.user;
+                //console.log(user);
+          // ...
+          console.log('User was Signed');
+        })
+            .catch((error) => {
+          //const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage);
+        });
+    };
 
 
     return (
@@ -25,8 +42,7 @@ const Login = () => {
                 <input type= "type" placeholder="username" value={username} onChange={(e)=>{e.preventDefault();setUsername(e.target.value);}}/>
                 <input type= "password" placeholder="password" value={password} onChange={(e)=>{e.preventDefault();setPassword(e.target.value);}}/>
                 <a href='/'> forgot password?</a>
-                <LoginButton onClick={()=>{console.log(username,password);}}>Log in</LoginButton>
-
+                <LoginButton onClick={userSignin}>Log in</LoginButton>
             </LogDetails>
 
 
